@@ -8,7 +8,7 @@ export const Variables = () => {
   return (
     <div>
         <h2>Nuevo componente { saludo }</h2>
-        <img src={ imagen }/>
+        <img src={ imagen } width='400px'/>
     </div>
   )
 }
