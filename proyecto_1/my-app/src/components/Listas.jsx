@@ -10,6 +10,14 @@ export const Listas = () => {
 
     const [lista, setLista] = useState(estadoInicial);
 
+    const agregarElemento = () => {
+        console.log('Agregar elemento');
+        setLista([
+            ...lista,
+            {id: 4, texto: 'tarea 4'},
+        ]);
+    };
+
   return (
     <>
         <h2>Listas</h2>
@@ -20,9 +28,10 @@ export const Listas = () => {
             de cada elemento
             */
             lista.map((item, index) => (
-                <h4 key={ item.id }>{ item.texto }</h4>
+                <h4 key={ index }>{ item.texto }</h4>
             ))
         }
+        <button onClick={ () => agregarElemento() }>Agregar</button>
     </>
   )
 }
