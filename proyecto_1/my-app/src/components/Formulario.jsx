@@ -5,10 +5,30 @@ export const Formulario = () => {
     const [fruta, setFruta] = React.useState('');
     const [descripcion, setDescripcion] = React.useState('');
 
+    const guardarDatos = (e) => {
+        e.preventDefault();
+        
+        if (!fruta.trim()) {
+            console.log('Está vacío fruta');
+            return;
+        }
+
+        if (!descripcion.trim()) {
+            console.log('Está vacío descripcion');
+            return;
+        }
+
+        console.log('Procesando datos...' + fruta + descripcion);
+        e.target.reset();
+        setFruta('');
+        setDescripcion('');
+
+    };
+
   return (
     <div>
         <h2>Formulario</h2>
-        <form>
+        <form onSubmit={ guardarDatos }>
             <input 
                 type='text'
                 placeholder='Ingrese fruta'
@@ -21,7 +41,7 @@ export const Formulario = () => {
                 className='form-control mb-2'
                 onChange={ e => setDescripcion(e.target.value) }
             />
-            <button className="btn btn-primary btn-block">Agregar</button>
+            <button className="btn btn-primary btn-block" type="submit">Agregar</button>
         </form>
     </div>
   )
