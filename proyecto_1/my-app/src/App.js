@@ -1,6 +1,7 @@
 import { Parrafo } from "./components/Parrafo";
 import { Variables } from "./components/Variables";
 import { Eventos } from "./components/Eventos";
+import { Contador } from "./components/Contador";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Parrafo />
       <Variables />
       <Eventos />
+      <Contador />
     </div>
   );
 }
