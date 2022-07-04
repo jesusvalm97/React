@@ -2,11 +2,14 @@ import React, { Fragment } from 'react'
 
 export const Eventos = () => {
 
+  const texto = 'Hola soy un nuevo texto.';
+
   const eventoClick = () => {
     console.log('Me diste click');
   };
 
   return (
+
     /*
     Para retornar si necesidad de tenerlo todo contenido en un div. Se puede retornar un menor que y mayor que vacíos, o bien usar
     las palabras reservadas Fragment (OJO, tiene que estar el import de Fragment con form react):
@@ -14,7 +17,8 @@ export const Eventos = () => {
     */
     <>
         <hr/>
-        <h2>Eventos</h2>
+        <h2>{ texto }</h2>
+    
         {/* 
         Para asignar un evento click hay dos formas:
         */}
