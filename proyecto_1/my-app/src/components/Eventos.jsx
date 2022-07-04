@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 export const Eventos = () => {
 
@@ -7,7 +7,12 @@ export const Eventos = () => {
   };
 
   return (
-    <div>
+    /*
+    Para retornar si necesidad de tenerlo todo contenido en un div. Se puede retornar un menor que y mayor que vacíos, o bien usar
+    las palabras reservadas Fragment (OJO, tiene que estar el import de Fragment con form react):
+    <Fragment> </Fragment>
+    */
+    <>
         <hr/>
         <h2>Eventos</h2>
         {/* 
@@ -27,6 +32,6 @@ export const Eventos = () => {
          Esto nos sirve para cuando es una funcion que reciba parametros
          */}
         <button onClick={ () => eventoClick() } >Click 2</button>
-    </div>
+    </>
   )
 }
