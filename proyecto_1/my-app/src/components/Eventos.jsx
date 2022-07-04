@@ -1,11 +1,18 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 
 export const Eventos = () => {
 
-  const texto = 'Hola soy un nuevo texto.';
+  /*
+  Para cambiar estados, es necesaio primero hacer import a useState con from react. Se declaro entre [], dandole como primer parametro
+  el nombre de la constante, segundo el nombre de la funcion que se llamará para cambiar el valor de la constante, todo esto igual a
+  useState(), entre parentesis seteas el valor por default, en este caso es un texto y seteamos un texto como valor defeault.
+  */
+  const [texto, setTexto] = useState('Texto desde estado');
 
   const eventoClick = () => {
     console.log('Me diste click');
+    
+    setTexto('Cambiando el texto....');
   };
 
   return (
