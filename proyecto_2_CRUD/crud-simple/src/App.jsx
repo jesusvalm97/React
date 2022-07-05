@@ -8,6 +8,8 @@ function App() {
   const [tarea, setTarea] = React.useState('');
   //Estado arreglo para guardar las nuevas tareas
   const [tareas, setTareas] = React.useState([]);
+  //Estado para saber si está en modo edicion de tareas o no
+  const [modoEdicion, setModoEdicion] = React.useState(false);
 
   //Funcion del formulario para agregar tareas
   const agregarTarea = e => {
@@ -35,6 +37,14 @@ function App() {
     const arrayFiltrado = tareas.filter(item => item.id !== id);
     //Se setea el nuevo array filtrado para que en automatico sea un array sin el item a eliminar y eso también afecte visualmente al recorrer el arreglo
     setTareas(arrayFiltrado);
+  };
+
+  //Funcion para editar tarea
+  const editarTarea = item => {
+    //Setar el modo edicion en true para que se haga el cambio de formulario visual
+    setModoEdicion(true);
+    //Setear la tarea actual para que aparezca sus datos en el formulario
+    setTarea(item.nombreTarea);
   };
 
   return (
@@ -65,7 +75,8 @@ function App() {
                   </button>
 
                   <button
-                    className="btn btn-warning btn-sm float-right">
+                    className="btn btn-warning btn-sm float-right"
+                    onClick={ () => editarTarea(item) }>
                     Editar
                   </button>
 
@@ -78,7 +89,12 @@ function App() {
         </div>
 
         <div className="col-4">
-          <h4 className="text-center">Formulario</h4>
+          <h4 className="text-center">
+            { 
+            //Dependiendo del valor de modo edicion, es el titulo que se muestra
+            modoEdicion ? 'Editar tarea' : 'Agregar tarea' 
+            }
+          </h4>
 
           {/* Formulario para agregar tareas */}
           <form onSubmit={ agregarTarea }>
@@ -91,7 +107,18 @@ function App() {
              value={ tarea }
              />
 
-             <button className="btn btn-dark btn-block" type="submit" >Agregar</button>
+            { 
+            
+            //Dependiendo del modo edición es el botón que se muestra
+            modoEdicion ? 
+            (
+              <button className="btn btn-warning btn-block" type="submit" >Editar</button>
+            ) 
+            : 
+            (
+              <button className="btn btn-dark btn-block" type="submit" >Agregar</button>
+            )
+          }
           </form>
 
         </div>
