@@ -1,9 +1,11 @@
 import React from "react";
+import { nanoid } from 'nanoid'
 
 function App() {
 
 
   const [tarea, setTarea] = React.useState('');
+  const [tareas, setTareas] = React.useState([]);
 
   const agregarTarea = e => {
 
@@ -15,6 +17,11 @@ function App() {
     }
 
     console.log(tarea);
+
+    setTareas([
+      ...tareas,
+      { id: nanoid(10), nombreTarea: tarea }
+    ]);
 
     setTarea('');
   };
