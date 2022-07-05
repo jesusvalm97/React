@@ -4,9 +4,12 @@ import { nanoid } from 'nanoid'
 function App() {
 
 
+  //Estado para ir creando una nueva tarea
   const [tarea, setTarea] = React.useState('');
+  //Estado arreglo para guardar las nuevas tareas
   const [tareas, setTareas] = React.useState([]);
 
+  //Funcion del formulario para agregar tareas
   const agregarTarea = e => {
 
     e.preventDefault();
@@ -38,13 +41,18 @@ function App() {
 
           <h4 className="text-center">Lista de tareas</h4>
 
+          {/* Aqui se va mostrando el listado de las tareas */}
           <ul className="list-group">
 
-            <li className="list-group-item">
-              <span className="lead">Nombre de la tarea</span>
-              <button className="btn btn-danger btn-sm float-right mx-2">Eliminar</button>
-              <button className="btn btn-warning btn-sm float-right">Editar</button>
-            </li>
+            {
+              tareas.map(item => (
+                <li className="list-group-item" key={ item.id }>
+                  <span className="lead">{ item.nombreTarea }</span>
+                  <button className="btn btn-danger btn-sm float-right mx-2">Eliminar</button>
+                  <button className="btn btn-warning btn-sm float-right">Editar</button>
+              </li>
+              ))
+            }
 
           </ul>
 
@@ -53,6 +61,7 @@ function App() {
         <div className="col-4">
           <h4 className="text-center">Formulario</h4>
 
+          {/* Formulario para agregar tareas */}
           <form onSubmit={ agregarTarea }>
 
             <input
