@@ -10,6 +10,8 @@ function App() {
   const [tareas, setTareas] = React.useState([]);
   //Estado para saber si está en modo edicion de tareas o no
   const [modoEdicion, setModoEdicion] = React.useState(false);
+  //Estado para guardar el id de la tarea que se está editando
+  const [id, setId] = React.useState('');
 
   //Funcion del formulario para agregar tareas
   const agregarTarea = e => {
@@ -39,12 +41,38 @@ function App() {
     setTareas(arrayFiltrado);
   };
 
-  //Funcion para editar tarea
-  const editarTarea = item => {
+  //Funcion para mostrar formulario para editar
+  const mostrarFormularioEditarTarea = item => {
     //Setar el modo edicion en true para que se haga el cambio de formulario visual
     setModoEdicion(true);
     //Setear la tarea actual para que aparezca sus datos en el formulario
     setTarea(item.nombreTarea);
+    //Setear id de la tarea que se va a editar
+    setId(item.id);
+  };
+
+  //Funcion para editar tarea
+  const editarTarea = e => {
+    e.preventDefault();
+
+    if (!tarea.trim()) {
+      console.log('Campo de tarea vacío');
+      return;
+    }
+
+    /*
+    Obtener array ya editado. Con el map se indica que si el item coincide con el item, lo sustituya con un nuevo objeto con el mismo id y con una nueva tarea 
+    (la que se está editando), de no ser así, agregar al array el item original.
+    Este nuevo array se setea como el array tareas, el modo edicion como false, la terea y id como string vacio ya que no se está editando nada
+    */
+    const arrayEditado = tareas.map(item => item.id === id ? {id: id, nombreTarea: tarea} : item);
+    setTareas(arrayEditado);
+    //Setar el modo edicion en true para que se haga el cambio de formulario visual
+    setModoEdicion(false);
+    //Setear la tarea actual para que aparezca sus datos en el formulario
+    setTarea('');
+    //Setear id de la tarea que se va a editar
+    setId('');
   };
 
   return (
@@ -76,7 +104,7 @@ function App() {
 
                   <button
                     className="btn btn-warning btn-sm float-right"
-                    onClick={ () => editarTarea(item) }>
+                    onClick={ () => mostrarFormularioEditarTarea(item) }>
                     Editar
                   </button>
 
@@ -97,7 +125,7 @@ function App() {
           </h4>
 
           {/* Formulario para agregar tareas */}
-          <form onSubmit={ agregarTarea }>
+          <form onSubmit={ modoEdicion ? editarTarea : agregarTarea }>
 
             <input
              type="text"
@@ -108,7 +136,7 @@ function App() {
              />
 
             { 
-            
+
             //Dependiendo del modo edición es el botón que se muestra
             modoEdicion ? 
             (
