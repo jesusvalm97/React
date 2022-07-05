@@ -12,6 +12,8 @@ function App() {
   const [modoEdicion, setModoEdicion] = React.useState(false);
   //Estado para guardar el id de la tarea que se está editando
   const [id, setId] = React.useState('');
+  //Estado para errores
+  const [error, setError] = React.useState(null);
 
   //Funcion del formulario para agregar tareas
   const agregarTarea = e => {
@@ -20,6 +22,7 @@ function App() {
     
     if (!tarea.trim()) {
       console.log('Campo de tarea vacío');
+      setError('Escriba algo por favor....');
       return;
     }
 
@@ -31,6 +34,7 @@ function App() {
     ]);
 
     setTarea('');
+    setError(null);
   };
 
   //Funcion para eliminar tarea
@@ -57,6 +61,7 @@ function App() {
 
     if (!tarea.trim()) {
       console.log('Campo de tarea vacío');
+      setError('Escriba algo por favor....');
       return;
     }
 
@@ -73,6 +78,8 @@ function App() {
     setTarea('');
     //Setear id de la tarea que se va a editar
     setId('');
+    //Setear el error como nulo
+    setError(null);
   };
 
   return (
@@ -91,25 +98,34 @@ function App() {
           <ul className="list-group">
 
             {
-              tareas.map(item => (
-                <li className="list-group-item" key={ item.id }>
 
-                  <span className="lead">{ item.nombreTarea }</span>
+              tareas.length === 0 ?
+              (
+                <li className="list-group-item">No hay tareas</li>
+              )
+              :
+              (
+                tareas.map(item => (
+                  <li className="list-group-item" key={ item.id }>
+  
+                    <span className="lead">{ item.nombreTarea }</span>
+  
+                    <button 
+                      className="btn btn-danger btn-sm float-right mx-2"
+                      onClick={ () => eliminarTerea(item.id) }>
+                      Eliminar
+                    </button>
+  
+                    <button
+                      className="btn btn-warning btn-sm float-right"
+                      onClick={ () => mostrarFormularioEditarTarea(item) }>
+                      Editar
+                    </button>
+  
+                </li>
+                ))
+              )
 
-                  <button 
-                    className="btn btn-danger btn-sm float-right mx-2"
-                    onClick={ () => eliminarTerea(item.id) }>
-                    Eliminar
-                  </button>
-
-                  <button
-                    className="btn btn-warning btn-sm float-right"
-                    onClick={ () => mostrarFormularioEditarTarea(item) }>
-                    Editar
-                  </button>
-
-              </li>
-              ))
             }
 
           </ul>
@@ -126,6 +142,10 @@ function App() {
 
           {/* Formulario para agregar tareas */}
           <form onSubmit={ modoEdicion ? editarTarea : agregarTarea }>
+
+            {
+              error ? <span className="text-danger">{ error }</span> : null
+            }
 
             <input
              type="text"
