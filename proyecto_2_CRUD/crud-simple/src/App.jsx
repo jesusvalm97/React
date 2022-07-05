@@ -29,6 +29,14 @@ function App() {
     setTarea('');
   };
 
+  //Funcion para eliminar tarea
+  const eliminarTerea = id => {
+    //Se arma un array excluyendo el item con el mismo id
+    const arrayFiltrado = tareas.filter(item => item.id !== id);
+    //Se setea el nuevo array filtrado para que en automatico sea un array sin el item a eliminar y eso también afecte visualmente al recorrer el arreglo
+    setTareas(arrayFiltrado);
+  };
+
   return (
     <div className="container mt-5">
       <h1 className="text-center">CRUD Simple</h1>
@@ -47,9 +55,20 @@ function App() {
             {
               tareas.map(item => (
                 <li className="list-group-item" key={ item.id }>
+
                   <span className="lead">{ item.nombreTarea }</span>
-                  <button className="btn btn-danger btn-sm float-right mx-2">Eliminar</button>
-                  <button className="btn btn-warning btn-sm float-right">Editar</button>
+
+                  <button 
+                    className="btn btn-danger btn-sm float-right mx-2"
+                    onClick={ () => eliminarTerea(item.id) }>
+                    Eliminar
+                  </button>
+
+                  <button
+                    className="btn btn-warning btn-sm float-right">
+                    Editar
+                  </button>
+
               </li>
               ))
             }
