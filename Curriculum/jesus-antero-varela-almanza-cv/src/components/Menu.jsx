@@ -2,9 +2,12 @@ import React from 'react'
 import { DropdownItem } from './DropdownItem'
 
 export const Menu = () => {
-var descargarCurriculum_options = [
-  {title:'Corto', href:'#containerEducacion'}
-];
+
+  //Options to the option descargarCurriculum
+  var descargarCurriculum_options = [
+    {title:'Corto', href:'#'},
+    {title:'Largo', href:'#'}
+  ];
 
   return (
     <nav id='containerMenu' className='navbar navbar-expand-lg navbar-light bg-light'>
@@ -59,17 +62,6 @@ var descargarCurriculum_options = [
           <DropdownItem 
           title='Descargar curriculum' 
           options={descargarCurriculum_options} />
-
-          {/* <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Descargar curriculum
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Proyecto 1</a>
-              <a class="dropdown-item" href="#">Proyecto 2</a>
-              <a class="dropdown-item" href="#">Proyecto 3</a>
-            </div>
-          </li> */}
 
           <li className='nav-item'>
             <a href='https://drive.google.com/file/d/1jkfm0AQxvDISsYP4W5kro-Hp2FDsW0kU/view?usp=sharing' className='nav-link'>Autobiograf&iacute;a</a>
